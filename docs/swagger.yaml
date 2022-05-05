@@ -1,0 +1,95 @@
+definitions:
+  pojo.User:
+    properties:
+      UserEmail:
+        type: string
+      UserId:
+        type: integer
+      UserName:
+        type: string
+      UserPassword:
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact:
+    name: Jessie Shen
+  description: Gin swagger (to CRUD User Info)
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: API for data in Redis
+  version: "1.0"
+paths:
+  /v1/users/:
+    get:
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: find all user infomation
+      tags:
+      - User
+    post:
+      parameters:
+      - description: user information in json
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/pojo.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully posted
+          schema:
+            type: string
+      summary: add new user
+      tags:
+      - User
+  /v1/users/{id}:
+    delete:
+      parameters:
+      - description: id of user
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully deleted
+          schema:
+            type: string
+      summary: delete user
+      tags:
+      - User
+    put:
+      parameters:
+      - description: id of user
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: amended user information in json
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/pojo.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully amended
+          schema:
+            type: string
+      summary: amend user
+      tags:
+      - User
+swagger: "2.0"
